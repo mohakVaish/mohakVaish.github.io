@@ -6,46 +6,87 @@
     <title>Mohak Vaish - ECE Portfolio</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Exo 2 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;800&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ScrollReveal.js for scroll animations -->
+    <script src="https://unpkg.com/scrollreveal"></script>
     <!-- Custom Styles & Font Configuration -->
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #111827; /* Dark blue-gray background */
-            color: #d1d5db; /* Light gray text */
+            font-family: 'Exo 2', sans-serif;
+            background: radial-gradient(circle at center, #0f172a, #0a0a0a);
+            color: #dbeafe;
+            overflow-x: hidden;
         }
-        /* Custom gradient for hero section and highlights */
-        .gradient-text {
-            background: linear-gradient(to right, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
         }
         .section-heading {
-            @apply text-3xl font-bold text-white mb-12 text-center;
+            @apply text-4xl font-extrabold text-cyan-400 mb-12 text-center tracking-wide;
         }
         .card {
-            @apply bg-gray-800 bg-opacity-60 backdrop-blur-md border border-gray-700 rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:border-sky-500;
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            backdrop-filter: blur(12px);
+            border: 1px solid #334155;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(94, 234, 212, 0.4);
+            border-color: rgba(94, 234, 212, 0.7);
+        }
+        .typewriter h1 {
+            overflow: hidden;
+            border-right: .15em solid #67e8f9;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .08em;
+            animation: typing 4s steps(50, end), blink-caret .75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #67e8f9; }
+        }
+        .glow-button {
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.7);
+            transition: all 0.3s ease-in-out;
+        }
+        .glow-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 1);
         }
     </style>
 </head>
 <body class="antialiased">
 
+    <canvas id="canvas-bg"></canvas>
+
     <!-- Header -->
-    <header class="bg-gray-800/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50">
+    <header class="bg-black/30 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-slate-800">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-white">Mohak Vaish</a>
+            <a href="#" class="text-2xl font-extrabold text-white hover:text-cyan-400 transition-colors tracking-wider">MOHAK VAISH</a>
             <nav class="hidden md:flex space-x-8">
-                <a href="#about" class="hover:text-sky-400 transition-colors">About</a>
-                <a href="#internships" class="hover:text-sky-400 transition-colors">Internships</a>
-                <a href="#projects" class="hover:text-sky-400 transition-colors">Projects</a>
-                <a href="#patents" class="hover:text-sky-400 transition-colors">Patents</a>
-                <a href="#certifications" class="hover:text-sky-400 transition-colors">Certifications</a>
-                <a href="#contact" class="hover:text-sky-400 transition-colors">Contact</a>
+                <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+                <a href="#internships" class="hover:text-cyan-400 transition-colors">Internships</a>
+                <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+                <a href="#patents" class="hover:text-cyan-400 transition-colors">Patents</a>
+                <a href="#certifications" class="hover:text-cyan-400 transition-colors">Certifications</a>
+                <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -54,48 +95,49 @@
             </button>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden">
-            <a href="#about" class="block py-2 px-6 text-sm hover:bg-gray-700">About</a>
-            <a href="#internships" class="block py-2 px-6 text-sm hover:bg-gray-700">Internships</a>
-            <a href="#projects" class="block py-2 px-6 text-sm hover:bg-gray-700">Projects</a>
-            <a href="#patents" class="block py-2 px-6 text-sm hover:bg-gray-700">Patents</a>
-            <a href="#certifications" class="block py-2 px-6 text-sm hover:bg-gray-700">Certifications</a>
-            <a href="#contact" class="block py-2 px-6 text-sm hover:bg-gray-700">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/90">
+            <a href="#about" class="block py-2 px-6 text-sm hover:bg-slate-800">About</a>
+            <a href="#internships" class="block py-2 px-6 text-sm hover:bg-slate-800">Internships</a>
+            <a href="#projects" class="block py-2 px-6 text-sm hover:bg-slate-800">Projects</a>
+            <a href="#patents" class="block py-2 px-6 text-sm hover:bg-slate-800">Patents</a>
+            <a href="#certifications" class="block py-2 px-6 text-sm hover:bg-slate-800">Certifications</a>
+            <a href="#contact" class="block py-2 px-6 text-sm hover:bg-slate-800">Contact</a>
         </div>
     </header>
 
-    <main class="container mx-auto px-6 pt-24">
+    <main class="container mx-auto px-6 pt-24 relative z-10">
 
         <!-- Hero Section -->
-        <section id="home" class="text-center py-20">
-            <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight">
-                Electronics & Communication Engineer
-            </h1>
-            <p class="mt-6 text-lg max-w-3xl mx-auto">
-                Passionate engineer with a strong foundation in <span class="text-sky-400">VLSI design</span>, <span class="text-sky-400">embedded systems</span>, and <span class="text-sky-400">AI/ML</span>. Experienced in SoC architecture, FPGA design, and robotics.
+        <section id="home" class="text-center min-h-screen flex flex-col justify-center items-center">
+            <div class="typewriter inline-block">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">
+                    Electronics & Communication Engineer
+                </h1>
+            </div>
+            <p class="mt-6 text-lg max-w-3xl mx-auto reveal font-light">
+                Passionate engineer with a strong foundation in <span class="text-cyan-400 font-semibold">VLSI design</span>, <span class="text-cyan-400 font-semibold">embedded systems</span>, and <span class="text-cyan-400 font-semibold">AI/ML</span>. Experienced in SoC architecture, FPGA design, and robotics.
             </p>
-            <div class="mt-8 flex justify-center gap-4">
-                <a href="#contact" class="bg-sky-500 text-white font-semibold px-6 py-3 rounded-md hover:bg-sky-600 transition-all">Get In Touch</a>
-                <a href="https://drive.google.com/uc?export=view&id=1_bGT1KZlQdSSe3HQOloFXs7xcMoMoODJ" target="_blank" rel="noopener noreferrer" class="bg-gray-700 text-white font-semibold px-6 py-3 rounded-md hover:bg-gray-600 transition-all">Download Resume</a>
+            <div class="mt-8 flex justify-center gap-4 reveal">
+                <a href="#contact" class="bg-cyan-500 text-slate-900 font-bold px-6 py-3 rounded-md hover:bg-cyan-400 transition-all glow-button">Get In Touch</a>
+                <a href="https://drive.google.com/file/d/1_bGT1KZlQdSSe3HQOloFXs7xcMoMoODJ/preview" target="_blank" rel="noopener noreferrer" class="bg-slate-700 text-white font-semibold px-6 py-3 rounded-md hover:bg-slate-600 transition-all transform hover:scale-105">View Resume</a>
             </div>
         </section>
 
         <!-- About Me Section -->
         <section id="about" class="py-20">
-            <h2 class="section-heading">About Me</h2>
-            <div class="flex flex-col md:flex-row items-center gap-12">
+            <div class="flex flex-col md:flex-row items-center gap-12 reveal">
                 <div class="md:w-1/3">
-                    <!-- IMPORTANT: Replace with a URL to your professional-looking photo -->
-                    <img src="https://placehold.co/400x400/1f2937/d1d5db?text=Your+Photo" alt="Mohak Vaish" class="rounded-full shadow-lg mx-auto">
+                    <img src="https://i.imgur.com/gY3D6h7.png" alt="Mohak Vaish" class="rounded-full shadow-lg mx-auto border-4 border-slate-700 hover:border-cyan-500 transition-colors duration-300">
                 </div>
                 <div class="md:w-2/3">
-                    <p class="mb-4">
+                    <h2 class="section-heading !text-left">About Me</h2>
+                    <p class="mb-4 font-light leading-relaxed">
                         Hello! I'm Mohak Vaish, an Electronics and Communication Engineering student at the Vellore Institute of Technology (VIT, Vellore). My primary interests lie in the fields of Digital VLSI Design, Embedded Systems, and the application of AI/ML in hardware.
                     </p>
-                    <p class="mb-4">
+                    <p class="mb-4 font-light leading-relaxed">
                         I thrive on pushing technological boundaries and am adept at problem-solving, circuit design, and system optimization. Through my hands-on projects and roles in competitive robotics teams like Team Orcus and roboVITics, I have gained practical experience in both hardware and software development.
                     </p>
-                    <p>
+                    <p class="font-light leading-relaxed">
                         I am proficient with tools and languages such as Verilog, C++, Python, Intel Quartus, and Cadence Virtuoso, and I'm eager to contribute to cutting-edge advancements in the semiconductor and embedded technology sectors.
                     </p>
                 </div>
@@ -104,177 +146,251 @@
 
         <!-- Internships Section -->
         <section id="internships" class="py-20">
-            <h2 class="section-heading">Internships</h2>
+            <h2 class="section-heading reveal">Internships</h2>
             <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-                <!-- Internship 1: PhyElements -->
-                <div class="card p-6 flex flex-col">
+                <div class="card p-6 flex flex-col reveal">
                     <div class="flex-grow">
                         <h3 class="text-xl font-bold text-white">VLSI Design Intern</h3>
-                        <p class="text-sky-400 font-semibold mb-2">PhyElements</p>
-                        <p class="text-sm text-gray-400 mb-4">May 15, 2025 - June 15, 2025</p>
-                        <p class="text-sm">Focused on the fundamentals of VLSI design, gaining hands-on experience with industry-standard tools and methodologies.</p>
+                        <p class="text-cyan-400 font-semibold mb-2">PhyElements</p>
+                        <p class="text-sm text-slate-400 mb-4">May 15, 2025 - June 15, 2025</p>
+                        <p class="text-sm font-light">Focused on the fundamentals of VLSI design, gaining hands-on experience with industry-standard tools and methodologies.</p>
                     </div>
-                    <a href="https://drive.google.com/uc?export=view&id=1IS1C--G0rqeWZvXs-mRxmV78kbHsNogv" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline mt-4 text-sm font-semibold">View Certificate</a>
+                    <a href="https://drive.google.com/file/d/1IS1C--G0rqeWZvXs-mRxmV78kbHsNogv/preview" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline mt-4 text-sm font-semibold">View Certificate</a>
                 </div>
-                <!-- Internship 2: Maven Silicon -->
-                <div class="card p-6 flex flex-col">
+                <div class="card p-6 flex flex-col reveal">
                     <div class="flex-grow">
                         <h3 class="text-xl font-bold text-white">VLSI Design Intern</h3>
-                        <p class="text-sky-400 font-semibold mb-2">Maven Silicon</p>
-                        <p class="text-sm text-gray-400 mb-4">June 5, 2024 - July 13, 2024</p>
-                        <p class="text-sm">Worked on advanced VLSI design and verification concepts, contributing to complex module development.</p>
+                        <p class="text-cyan-400 font-semibold mb-2">Maven Silicon</p>
+                        <p class="text-sm text-slate-400 mb-4">June 5, 2024 - July 13, 2024</p>
+                        <p class="text-sm font-light">Worked on advanced VLSI design and verification concepts, contributing to complex module development.</p>
                     </div>
-                     <a href="https://drive.google.com/uc?export=view&id=1pU7x3t-KKusF5jGsWirU4l9woOY6Qqd-" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline mt-4 text-sm font-semibold">View Certificate</a>
+                     <a href="https://drive.google.com/file/d/1pU7x3t-KKusF5jGsWirU4l9woOY6Qqd-/preview" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline mt-4 text-sm font-semibold">View Certificate</a>
                 </div>
             </div>
         </section>
 
         <!-- Projects Section -->
         <section id="projects" class="py-20">
-            <h2 class="section-heading">My Projects</h2>
+            <h2 class="section-heading reveal">My Projects</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Project 1: Weed Detection System -->
-                <div class="card">
+                <div class="card reveal">
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2">Weed Detection & Autonomous Navigation</h3>
-                        <p class="text-sm mb-4">Developed a deep learning-based weed detection system with Intel FPGA-accelerated path planning for an autonomous farming robot, enhancing accuracy and sustainability.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-sky-900 text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded">Machine Learning</span>
-                            <span class="bg-sky-900 text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded">FPGA</span>
-                            <span class="bg-sky-900 text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded">Embedded Systems</span>
-                             <span class="bg-sky-900 text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded">Robotics</span>
+                        <p class="text-sm mb-4 font-light">Developed a deep learning-based weed detection system with Intel FPGA-accelerated path planning for an autonomous farming robot.</p>
+                        <div class="flex flex-wrap gap-2 my-4">
+                            <span class="bg-cyan-900/50 text-cyan-300 text-xs font-semibold px-3 py-1 rounded-full">Machine Learning</span>
+                            <span class="bg-cyan-900/50 text-cyan-300 text-xs font-semibold px-3 py-1 rounded-full">FPGA</span>
+                            <span class="bg-cyan-900/50 text-cyan-300 text-xs font-semibold px-3 py-1 rounded-full">Robotics</span>
                         </div>
-                        <div class="flex gap-4">
-                            <a href="#" class="text-sky-400 hover:underline">GitHub Repo</a>
-                        </div>
+                        <a href="#" class="text-cyan-400 hover:underline text-sm font-semibold">GitHub Repo</a>
                     </div>
                 </div>
-
-                <!-- Project 2: Quadruped Bot -->
-                <div class="card">
+                <div class="card reveal">
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2">Bio-Inspired Quadruped Robot</h3>
-                        <p class="text-sm mb-4">Designed and built a quadruped robot for adaptive mobility on uneven terrain, controlled by an Arduino Uno and HC-05 Bluetooth module for stable maneuvering.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-sky-900 text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded">Arduino</span>
-                            <span class="bg-sky-900 text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded">Embedded C</span>
-                            <span class="bg-sky-900 text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded">Robotics</span>
-                            <span class="bg-sky-900 text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded">KiCad</span>
+                        <p class="text-sm mb-4 font-light">Designed and built a quadruped robot for adaptive mobility on uneven terrain, controlled by an Arduino Uno and HC-05 Bluetooth module.</p>
+                        <div class="flex flex-wrap gap-2 my-4">
+                            <span class="bg-cyan-900/50 text-cyan-300 text-xs font-semibold px-3 py-1 rounded-full">Arduino</span>
+                             <span class="bg-cyan-900/50 text-cyan-300 text-xs font-semibold px-3 py-1 rounded-full">Embedded C</span>
+                            <span class="bg-cyan-900/50 text-cyan-300 text-xs font-semibold px-3 py-1 rounded-full">KiCad</span>
                         </div>
-                        <div class="flex gap-4">
-                            <a href="#" class="text-sky-400 hover:underline">GitHub Repo</a>
-                        </div>
+                        <a href="#" class="text-cyan-400 hover:underline text-sm font-semibold">GitHub Repo</a>
                     </div>
                 </div>
-                
-                <!-- Project 3: Mobile Jammer -->
-                <div class="card">
+                <div class="card reveal">
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-white mb-2">Mobile Jammer Circuit Simulation</h3>
-                        <p class="text-sm mb-4">Designed and simulated a circuit in Multisim to demonstrate the principles of mobile signal jamming, focusing on generating RF interference to disrupt communication signals.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-sky-900 text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded">Multisim</span>
-                            <span class="bg-sky-900 text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded">Circuit Simulation</span>
-                            <span class="bg-sky-900 text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded">RF Electronics</span>
+                        <p class="text-sm mb-4 font-light">Designed and simulated a circuit in Multisim to demonstrate the principles of mobile signal jamming, focusing on generating RF interference.</p>
+                        <div class="flex flex-wrap gap-2 my-4">
+                            <span class="bg-cyan-900/50 text-cyan-300 text-xs font-semibold px-3 py-1 rounded-full">Multisim</span>
+                            <span class="bg-cyan-900/50 text-cyan-300 text-xs font-semibold px-3 py-1 rounded-full">RF Electronics</span>
                         </div>
-                        <div class="flex gap-4">
-                            <a href="https://drive.google.com/uc?export=view&id=12OfU6H7skmFAXwvxcfHb2TGb3_W1_CIP" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline">Project Details</a>
-                        </div>
+                        <a href="https://drive.google.com/file/d/12OfU6H7skmFAXwvxcfHb2TGb3_W1_CIP/preview" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline text-sm font-semibold">Project Details</a>
                     </div>
                 </div>
-
             </div>
         </section>
 
         <!-- Patents Section -->
         <section id="patents" class="py-20">
-            <h2 class="section-heading">Patents</h2>
-            <div class="max-w-4xl mx-auto">
-                <a href="https://drive.google.com/uc?export=view&id=1rkHLCBasNpWsY53TqduaXGde4eIlOG1D" target="_blank" rel="noopener noreferrer" class="card p-6 flex flex-col md:flex-row items-center gap-6 hover:bg-gray-700/60 transition-colors">
-                    <i data-lucide="file-text" class="w-10 h-10 text-sky-400 flex-shrink-0"></i>
+            <h2 class="section-heading reveal">Patents</h2>
+            <div class="max-w-4xl mx-auto reveal">
+                <a href="https://drive.google.com/file/d/1rkHLCBasNpWsY53TqduaXGde4eIlOG1D/preview" target="_blank" rel="noopener noreferrer" class="card p-6 flex flex-col md:flex-row items-center gap-6 hover:bg-slate-700/60 transition-colors">
+                    <i data-lucide="file-text" class="w-10 h-10 text-cyan-400 flex-shrink-0"></i>
                     <div class="flex-grow">
                         <h3 class="font-semibold text-white text-xl">Design Patent: Water Cleaning Bot</h3>
-                        <p class="text-sm text-gray-300 mt-2">Innovated on existing designs to enhance performance, efficiency, and durability through refined mechanical and electronic systems.</p>
+                        <p class="text-sm text-slate-300 mt-2 font-light">Innovated on existing designs to enhance performance, efficiency, and durability through refined mechanical and electronic systems.</p>
                     </div>
-                    <i data-lucide="external-link" class="w-5 h-5 text-gray-500 ml-auto flex-shrink-0 hidden md:block"></i>
+                    <i data-lucide="external-link" class="w-5 h-5 text-slate-500 ml-auto flex-shrink-0 hidden md:block"></i>
                 </a>
             </div>
         </section>
 
         <!-- Certifications & Achievements Section -->
         <section id="certifications" class="py-20">
-            <h2 class="section-heading">Certifications & Achievements</h2>
+            <h2 class="section-heading reveal">Certifications & Achievements</h2>
             <div class="max-w-4xl mx-auto space-y-4">
-                <a href="https://drive.google.com/uc?export=view&id=18qdD1lBXgwe56Fy_l0m3avRUghlWLTpa" target="_blank" rel="noopener noreferrer" class="card p-4 flex items-center gap-4 hover:bg-gray-700/60 transition-colors">
-                    <i data-lucide="award" class="w-8 h-8 text-sky-400 flex-shrink-0"></i>
+                <a href="https://drive.google.com/file/d/18qdD1lBXgwe56Fy_l0m3avRUghlWLTpa/preview" target="_blank" rel="noopener noreferrer" class="card p-4 flex items-center gap-4 hover:bg-slate-700/60 transition-colors reveal">
+                    <i data-lucide="award" class="w-8 h-8 text-cyan-400 flex-shrink-0"></i>
                     <div class="flex-grow">
                         <h3 class="font-semibold text-white">PRE-VDAT Workshop: Hands-on VLSI Design using Cadence Tools</h3>
-                        <p class="text-sm text-gray-400">Certificate of Training</p>
+                        <p class="text-sm text-slate-400">Certificate of Training</p>
                     </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 ml-auto flex-shrink-0"></i>
+                    <i data-lucide="external-link" class="w-4 h-4 text-slate-500 ml-auto flex-shrink-0"></i>
                 </a>
-                <a href="https://drive.google.com/uc?export=view&id=13iBOKtQzNfQckaN7S58KUBFOh0xR51V1" target="_blank" rel="noopener noreferrer" class="card p-4 flex items-center gap-4 hover:bg-gray-700/60 transition-colors">
-                    <i data-lucide="award" class="w-8 h-8 text-sky-400 flex-shrink-0"></i>
+                <a href="https://drive.google.com/file/d/13iBOKtQzNfQckaN7S58KUBFOh0xR51V1/preview" target="_blank" rel="noopener noreferrer" class="card p-4 flex items-center gap-4 hover:bg-slate-700/60 transition-colors reveal">
+                    <i data-lucide="award" class="w-8 h-8 text-cyan-400 flex-shrink-0"></i>
                     <div class="flex-grow">
                         <h3 class="font-semibold text-white">Prompt Engineering for Developers</h3>
-                        <p class="text-sm text-gray-400">Certificate of Completion</p>
+                        <p class="text-sm text-slate-400">Certificate of Completion</p>
                     </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 ml-auto flex-shrink-0"></i>
+                    <i data-lucide="external-link" class="w-4 h-4 text-slate-500 ml-auto flex-shrink-0"></i>
                 </a>
-                <a href="https://drive.google.com/uc?export=view&id=14rnXtwvfFINLAiLDPhfoOi16TmRokR5J" target="_blank" rel="noopener noreferrer" class="card p-4 flex items-center gap-4 hover:bg-gray-700/60 transition-colors">
-                    <i data-lucide="award" class="w-8 h-8 text-sky-400 flex-shrink-0"></i>
+                <a href="https://drive.google.com/file/d/14rnXtwvfFINLAiLDPhfoOi16TmRokR5J/preview" target="_blank" rel="noopener noreferrer" class="card p-4 flex items-center gap-4 hover:bg-slate-700/60 transition-colors reveal">
+                    <i data-lucide="award" class="w-8 h-8 text-cyan-400 flex-shrink-0"></i>
                     <div class="flex-grow">
                         <h3 class="font-semibold text-white">ElectroHack Hackathon - Runner Up</h3>
-                        <p class="text-sm text-gray-400">Secured 2nd place by implementing ML algorithms on an FPGA.</p>
+                        <p class="text-sm text-slate-400">Secured 2nd place by implementing ML algorithms on an FPGA.</p>
                     </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 ml-auto flex-shrink-0"></i>
+                    <i data-lucide="external-link" class="w-4 h-4 text-slate-500 ml-auto flex-shrink-0"></i>
                 </a>
-                <a href="#" target="_blank" rel="noopener noreferrer" class="card p-4 flex items-center gap-4 hover:bg-gray-700/60 transition-colors">
-                    <i data-lucide="award" class="w-8 h-8 text-sky-400 flex-shrink-0"></i>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="card p-4 flex items-center gap-4 hover:bg-slate-700/60 transition-colors reveal">
+                    <i data-lucide="award" class="w-8 h-8 text-cyan-400 flex-shrink-0"></i>
                     <div class="flex-grow">
                         <h3 class="font-semibold text-white">Combat Robotics Champion</h3>
-                        <p class="text-sm text-gray-400">1st place at TechnoXian 8.0 and multiple podium finishes with Team Orcus.</p>
+                        <p class="text-sm text-slate-400">1st place at TechnoXian 8.0 and multiple podium finishes with Team Orcus.</p>
                     </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 ml-auto flex-shrink-0"></i>
+                    <i data-lucide="external-link" class="w-4 h-4 text-slate-500 ml-auto flex-shrink-0"></i>
                 </a>
-                <a href="#" target="_blank" rel="noopener noreferrer" class="card p-4 flex items-center gap-4 hover:bg-gray-700/60 transition-colors">
-                    <i data-lucide="award" class="w-8 h-8 text-sky-400 flex-shrink-0"></i>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="card p-4 flex items-center gap-4 hover:bg-slate-700/60 transition-colors reveal">
+                    <i data-lucide="award" class="w-8 h-8 text-cyan-400 flex-shrink-0"></i>
                     <div class="flex-grow">
                         <h3 class="font-semibold text-white">Young Reader Leader Award</h3>
-                        <p class="text-sm text-gray-400">Awarded in the prestigious national writing competition at Katha Utsav.</p>
+                        <p class="text-sm text-slate-400">Awarded in the prestigious national writing competition at Katha Utsav.</p>
                     </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-gray-500 ml-auto flex-shrink-0"></i>
+                    <i data-lucide="external-link" class="w-4 h-4 text-slate-500 ml-auto flex-shrink-0"></i>
                 </a>
             </div>
         </section>
 
         <!-- Contact Section -->
         <section id="contact" class="py-20 text-center">
-            <h2 class="section-heading">Get In Touch</h2>
-            <p class="max-w-xl mx-auto mb-8">
+            <h2 class="section-heading reveal">Get In Touch</h2>
+            <p class="max-w-xl mx-auto mb-8 reveal font-light">
                 I'm actively looking for opportunities and would love to connect. Feel free to reach out via email or connect with me on LinkedIn.
             </p>
-            <a href="mailto:mohakvaish@gmail.com" class="bg-sky-500 text-white font-semibold px-8 py-4 rounded-md hover:bg-sky-600 transition-all text-lg">
+            <a href="mailto:mohakvaish@gmail.com" class="bg-cyan-500 text-slate-900 font-bold px-8 py-4 rounded-md hover:bg-cyan-400 transition-all text-lg glow-button reveal">
                 Say Hello
             </a>
         </section>
-
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900">
-        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+    <footer class="bg-slate-900/50 border-t border-slate-800">
+        <div class="container mx-auto px-6 py-8 text-center text-slate-400">
             <div class="flex justify-center gap-6 mb-4">
-                <!-- IMPORTANT: Replace '#' with links to your social profiles -->
-                <a href="#" class="hover:text-white">GitHub</a>
-                <a href="#" class="hover:text-white">LinkedIn</a>
+                <a href="https://github.com/mohakVaish" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors">GitHub</a>
+                <a href="https://www.linkedin.com/in/mohak-vaish-16ab30276/" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors">LinkedIn</a>
             </div>
             <p>&copy; 2024 Mohak Vaish. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script>
+        // --- Interactive PCB Background ---
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() * 1 - 0.5) * 0.5;
+                this.speedY = (Math.random() * 1 - 0.5) * 0.5;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = '#334155';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            let numberOfParticles = (canvas.width * canvas.height) / 10000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let x = Math.random() * canvas.width;
+                let y = Math.random() * canvas.height;
+                particles.push(new Particle(x, y));
+            }
+        }
+
+        function connectParticles() {
+            let opacityValue = 1;
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    let distance = Math.sqrt(
+                        (particles[a].x - particles[b].x) * (particles[a].x - particles[b].x) +
+                        (particles[a].y - particles[b].y) * (particles[a].y - particles[b].y)
+                    );
+                    if (distance < 120) {
+                        opacityValue = 1 - (distance / 120);
+                        ctx.strokeStyle = 'rgba(94, 234, 212,' + opacityValue + ')';
+                        ctx.lineWidth = 0.7;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            connectParticles();
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+
+        resizeCanvas();
+        initParticles();
+        animate();
+
+        // --- Scroll Animations ---
+        const sr = ScrollReveal({
+            origin: 'bottom',
+            distance: '60px',
+            duration: 1500,
+            delay: 200,
+            reset: false,
+        });
+
+        sr.reveal('.reveal');
+
         // Initialize Lucide Icons
         lucide.createIcons();
 
